@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Anime Quotes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="main-heading">Anime Quotes</h1>
+            <p class="subheading">Explore inspiring quotes from your favorite anime characters.</p>
+        </div>
+
+        <div class="quotes-section">
+            <div class="quote-card">
+                <p class="quote-text" id="quote">Loading...</p>
+                <p class="quote-author" id="quoteAuthor">-</p>
+            </div>
+            <div class="generate-button">
+                <button type="button" class="btn btn-outline-dark btn-light" onclick="toggleQuote()">Generate random quote</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      async function toggleQuote() {
+          var quoteElement = document.getElementById("quote");
+          var quoteElementAuth = document.getElementById("quoteAuthor");
+          var quoteBox = document.getElementsByClassName("quote-card")
+
+
+          if (quoteElement.hidden) {
+              try {
+                  const response = await fetch("/getQuote");
+                  const data = await response.json();
+                  const { randomQuote, characterName } = data;
+  
+                  quoteElement.innerHTML = `${randomQuote}`;
+                  quoteElementAuth.innerHTML = `${characterName}`;
+
+              } catch (error) {
+                  console.error("Error fetching new quote:", error);
+              }
+
+          } else {
+              try {
+                  const response = await fetch("/getQuote");
+                  const data = await response.json();
+                  const { randomQuote, characterName } = data;
+                  quoteElement.innerHTML = `${randomQuote}`;
+                  quoteElementAuth.innerHTML = `${characterName}`;
+
+
+                  var quoteBoxHeight = $(".quotes-section").height() - 220
+                  $(".jumbotron").css("padding-bottom",`${quoteBoxHeight + 300}px`)
+                  $(".quotes-section").css("bottom",`${quoteBoxHeight + 300}px`)
+
+
+                  console.log(quoteBox.length)
+
+              } catch (error) {
+                  console.error("Error fetching new quote:", error);
+              }
+  
+          }
+      }
+  </script>
+
+</body>
+
+</html>
