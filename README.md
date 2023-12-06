@@ -13,9 +13,9 @@ Open your browser and go to https://anime-quotes-vua6.onrender.com/ to view the 
 - Simple frontend with a button to get a new quote and a textarea to display the quotes.
 
 ## Technologies Used
-Express.js
-EJS (Embedded JavaScript)
-Axios
+- [Express.js](https://expressjs.com/): Web application framework for Node.js
+- [EJS (Embedded JavaScript)](https://ejs.co/): Templating language for generating HTML with JavaScript
+- [Axios](https://axios-http.com/): Promise-based HTTP client for the browser and Node.js
 
 ## Acknowledgments
 animechan.xyz for providing the anime quotes API.
